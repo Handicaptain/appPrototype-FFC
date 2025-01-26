@@ -1,0 +1,183 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friday Film Club</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <h1 class="text-xl font-bold">Friday Film Club</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="/" class="text-gray-700 hover:text-blue-500">Home</a></li>
+                    <li><a href="/Suggestions" class="text-gray-700 hover:text-blue-500">Suggestions</a></li>
+                    <li><a href="/TopRated" class="text-gray-700 hover:text-blue-500">Top Rated</a></li>
+                    <li><a href="/Login" class="text-gray-700 hover:text-blue-500">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto mt-8 space-y-12">
+        <!-- This Week's Pick Section -->
+        @{
+            var weeklyPick = Model.Films.First(x => x.WeeklyPick == true);
+        
+        <section class="bg-gray-900 text-white p-8 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4">This Week's Pick</h2>
+            <div class="flex space-x-6">
+                <div class="bg-gray-700 w-1/4 h-48 flex items-center justify-center rounded-lg">
+                    <picture>
+                            <source srcset="@weeklyPick.ImagePath" type="image/svg+xml">
+                        <img src="@weeklyPick.ImagePath" alt="@weeklyPick.Title" style = "height:180px" />
+                    </picture>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold">@weeklyPick.Title</h3>
+                    <p class="text-gray-300 mb-2">@weeklyPick.Description</p>
+                    <p class="text-gray-400 mb-4"><span>@weeklyPick.Year</span> | <span>@weeklyPick.DurationHrs h @weeklyPick.DurationMins m</span></p>
+                            @{
+                                switch (weeklyPick.Rating)
+                                {
+                                    case 1:
+                                        <text>⭐</text>
+                                        ;
+                                        break;
+                                    case 2:
+                                        <text>⭐⭐</text>
+                                        ;
+                                        break;
+                                    case 3:
+                                        <text>⭐⭐⭐</text>
+                                        ;
+                                        break;
+                                    case 4:
+                                        <text>⭐⭐⭐⭐</text>
+                                        ;
+                                        break;
+                                    case 5:
+                                        <text>⭐⭐⭐⭐⭐</text>
+                                        ;
+                                        break;
+                                    default:
+                                        <text>Not Rated</text>
+                                        ;
+                                        break;
+                                }
+                            }
+                </div>
+            </div>
+            </section>
+        }
+        <section>
+            <h2 class="text-xl font-bold mb-4">Rate Recent Films</h2>
+        @foreach (var film in Model.Films.Where(x => x.WeeklyPick == false))
+        {
+            
+                <div class="flex space-x-6">
+                    <div class="bg-white p-4 rounded-lg shadow-md w-1/4">
+                        <div class="bg-gray-200 h-32 flex items-center justify-center rounded-lg mb-4">
+                            <picture>
+                                <source srcset="@film.ImagePath" type="image/svg+xml">
+                                <img src="@film.ImagePath" alt="@film.Title" style="height:180px" />
+                            </picture>
+                        </div>
+                        <h3 class="font-semibold mb-2">@film.Title</h3>
+                        <div class="flex items-center space-x-1 mb-2">
+                            <span class="text-gray-500">@{
+                                    switch (film.Rating)
+                                    {
+                                        case 1:
+                                            <text>⭐</text>
+                                            ;
+                                            break;
+                                        case 2:
+                                            <text>⭐⭐</text>
+                                            ;
+                                            break;
+                                        case 3:
+                                            <text>⭐⭐⭐</text>
+                                            ;
+                                            break;
+                                        case 4:
+                                            <text>⭐⭐⭐⭐</text>
+                                            ;
+                                            break;
+                                        case 5:
+                                            <text>⭐⭐⭐⭐⭐</text>
+                                            ;
+                                            break;
+                                        default:
+                                            <text>Not Rated</text>
+                                            ;
+                                            break;
+                                    }
+                                }
+                            </span>
+                        </div>
+                        <button class="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded w-full">Rate</button>
+                    </div>
+                </div>
+            
+        }
+        </section> 
+        <!-- Rate Recent Films Section -->
+
+
+        <!-- Film Suggestions Section -->
+        <section>
+            <h2 class="text-xl font-bold mb-4">Film Suggestions</h2>
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Make a Suggestion -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <h3 class="font-semibold mb-4">Make a Suggestion</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label for="title" class="block text-sm font-medium text-gray-700">Film Title</label>
+                            <input id="title" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                        </div>
+                        <div class="mb-4">
+                            <label for="reason" class="block text-sm font-medium text-gray-700">Why do you recommend this film?</label>
+                            <textarea id="reason" rows="3" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded">Submit Suggestion</button>
+                    </form>
+                </div>
+                <!-- Recent Suggestions -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <h3 class="font-semibold mb-4">Recent Suggestions</h3>
+                    <div class="space-y-2">
+                        <p class="flex items-center">
+                            <span class="font-bold">John Doe:</span>
+                            <span class="ml-2">The Godfather - A classic that everyone should watch!</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highest Rated Films Section -->
+        <section>
+            <h2 class="text-xl font-bold mb-4">Highest Rated Films</h2>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <ol class="list-decimal list-inside space-y-2">
+                    <li class="flex items-center">
+                        <div class="bg-gray-200 w-10 h-10 flex items-center justify-center rounded-lg mr-4">
+                            <span class="text-gray-500">Image</span>
+                        </div>
+                        <span class="font-semibold">The Shawshank Redemption</span>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
