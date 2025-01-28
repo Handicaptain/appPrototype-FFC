@@ -1,0 +1,152 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggested Films - Friday Film Club</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <h1 class="text-xl font-bold">Friday Film Club</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="/" class="text-gray-700 hover:text-blue-500">Home</a></li>
+                    <li><a href="/Suggestions" class="text-gray-700 hover:text-blue-500">Suggestions</a></li>
+                    <li><a href="/TopRated" class="text-gray-700 hover:text-blue-500">Top Rated</a></li>
+                    <li><a href="/Login" class="text-gray-700 hover:text-blue-500">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8">
+        <!-- Suggested Films Section -->
+        <h2 class="text-2xl font-bold mb-6">Suggested Films</h2>
+
+        <div class="flex justify-end mb-4">
+            <select class="border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500">
+                <option>Sort by: Latest</option>
+                <option>Sort by: Oldest</option>
+                <option>Sort by: Highest Rated</option>
+            </select>
+        </div>
+
+        <!-- Film 1 -->
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <div class="flex gap-6">
+                <!-- Poster Image -->
+                <div class="w-32 h-48 bg-gray-300 flex items-center justify-center text-gray-500">
+                    image here
+                </div>
+                <!-- Film Details -->
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold">The Grand Budapest Hotel</h3>
+                    <p class="text-gray-600 mb-4">
+                        A whimsical comedy that follows the adventures of a legendary hotel concierge and his trusted lobby boy as they become embroiled in the theft of a priceless Renaissance painting.
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        Director: Wes Anderson &nbsp;&nbsp;|&nbsp;&nbsp; 2014
+                    </p>
+                </div>
+                <!-- Rating -->
+                <div class="w-20 text-center">
+                    <div class="text-2xl font-bold">4.8</div>
+                    <div class="text-sm text-gray-500">/5</div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="mt-6">
+                <h4 class="text-lg font-bold mb-2">Comments (12)</h4>
+                <div class="space-y-4">
+                    <!-- Comment 1 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                        <div>
+                            <p class="font-bold">Sarah Johnson <span class="text-sm text-gray-500">2 days ago</span></p>
+                            <p>Absolutely brilliant film! The attention to detail in every frame is stunning.</p>
+                        </div>
+                    </div>
+                    <!-- Comment 2 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                        <div>
+                            <p class="font-bold">Mike Peters <span class="text-sm text-gray-500">1 week ago</span></p>
+                            <p>The perfect blend of comedy and drama. Ralph Fiennes gives an outstanding performance!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Comment Form -->
+                <form class="mt-4">
+                    <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                              rows="3"
+                              placeholder="Add a comment..."></textarea>
+                    <button type="submit"
+                            class="mt-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500">
+                        Post Comment
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Film 2 -->
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <div class="flex gap-6">
+                <!-- Poster Image -->
+                <div class="w-32 h-48 bg-gray-300 flex items-center justify-center text-gray-500">
+                    image here
+                </div>
+                <!-- Film Details -->
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold">Everything Everywhere All at Once</h3>
+                    <p class="text-gray-600 mb-4">
+                        An aging Chinese immigrant is swept up in an insane adventure, where she alone can save the world by exploring other universes connecting with the lives she could have led.
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        Directors: Daniel Kwan, Daniel Scheinert &nbsp;&nbsp;|&nbsp;&nbsp; 2022
+                    </p>
+                </div>
+                <!-- Rating -->
+                <div class="w-20 text-center">
+                    <div class="text-2xl font-bold">4.9</div>
+                    <div class="text-sm text-gray-500">/5</div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="mt-6">
+                <h4 class="text-lg font-bold mb-2">Comments (8)</h4>
+                <div class="space-y-4">
+                    <!-- Comment 1 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                        <div>
+                            <p class="font-bold">John Doe <span class="text-sm text-gray-500">1 day ago</span></p>
+                            <p>Mind-bending and emotionally resonant. Michelle Yeoh deserved all the awards for this!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Comment Form -->
+                <form class="mt-4">
+                    <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                              rows="3"
+                              placeholder="Add a comment..."></textarea>
+                    <button type="submit"
+                            class="mt-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-500">
+                        Post Comment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
