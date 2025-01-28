@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

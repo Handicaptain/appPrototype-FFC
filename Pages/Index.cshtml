@@ -37,7 +37,7 @@
                 <div class="bg-gray-700 w-1/4 h-48 flex items-center justify-center rounded-lg">
                     <picture>
                             <source srcset="@weeklyPick.ImagePath" type="image/svg+xml">
-                        <img src="@weeklyPick.ImagePath" alt="@weeklyPick.Title" style = "height:180px" />
+                        <img src="@weeklyPick.ImagePath" alt="@weeklyPick.Title" style = "height:140px" />
                     </picture>
                 </div>
                 <div>
@@ -83,11 +83,11 @@
         {
             
                 <div class="flex space-x-6">
-                    <div class="bg-white p-4 rounded-lg shadow-md w-1/4">
+                    <div class="bg-white p-4 rounded-lg shadow-md w-1/4" style="width:250px">
                         <div class="bg-gray-200 h-32 flex items-center justify-center rounded-lg mb-4">
                             <picture>
                                 <source srcset="@film.ImagePath" type="image/svg+xml">
-                                <img src="@film.ImagePath" alt="@film.Title" style="height:180px" />
+                                <img src="@film.ImagePath" alt="@film.Title" style="height:120px" />
                             </picture>
                         </div>
                         <h3 class="font-semibold mb-2">@film.Title</h3>
@@ -166,12 +166,18 @@
 
         <!-- Highest Rated Films Section -->
         <section>
+                    @{
+            var HighestRated = Model.Films;
+                    }
             <h2 class="text-xl font-bold mb-4">Highest Rated Films</h2>
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <ol class="list-decimal list-inside space-y-2">
                     <li class="flex items-center">
-                        <div class="bg-gray-200 w-10 h-10 flex items-center justify-center rounded-lg mr-4">
-                            <span class="text-gray-500">Image</span>
+                        <div class="bg-gray-200 w-20 h-20 flex items-center justify-center rounded-lg mr-4">
+                            <picture>
+                                <source srcset="/images/shawshank.jpg" type="image/svg+xml">
+                                <img src="/images/shawshank.jpg" alt="Shawshank Redemption" />
+                            </picture>
                         </div>
                         <span class="font-semibold">The Shawshank Redemption</span>
                     </li>

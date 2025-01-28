@@ -20,6 +20,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Configure the application to start with the login page
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/Login");
+    return Task.CompletedTask;
+});
+
 app.MapRazorPages();
 
 app.Run();
