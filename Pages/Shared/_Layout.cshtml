@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - appPrototype_FFC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/appPrototype_FFC.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">appPrototype_FFC</a>
+                <a class="navbar-brand" asp-area="" asp-page="/home">Friday Film Club</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,10 +19,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/suggested">Suggestions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/TopRated">Top Rated</a>
+                        </li>
+                        <!-- Dropdown for Login -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Login
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Account/View">View Account</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Account/Logout">Log Out</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -36,16 +48,35 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - appPrototype_FFC - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+
+        <ul class="dropdown-menu absolute hidden bg-white shadow-md rounded-lg p-2">
+            <li><a class="dropdown-item block px-4 py-2 text-gray-700 hover:bg-gray-100" asp-area="" asp-page="/Account/View">View Account</a></li>
+            <li><a class="dropdown-item block px-4 py-2 text-gray-700 hover:bg-gray-100" asp-area="" asp-page="/Account/Logout">Log Out</a></li>
+        </ul>
+    </zli>
+
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdown = document.querySelector('.nav-item.dropdown');
+            const menu = dropdown.querySelector('.dropdown-menu');
+
+            dropdown.addEventListener("mouseenter", function () {
+                menu.classList.add("show");
+            });
+
+            dropdown.addEventListener("mouseleave", function () {
+                menu.classList.remove("show");
+            });
+        });
+    </script>
+
 </body>
 </html>

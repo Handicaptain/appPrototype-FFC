@@ -1,0 +1,65 @@
+﻿@page
+@model appPrototype_FFC.Pages.IndexModel
+@{
+    Layout = Layout;
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mx-auto p-6 bg-gray-50 min-h-screen flex flex-col items-center">
+    <!-- Profile Header -->
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl mb-6">
+        <div class="flex items-center justify-between">
+            <!-- Profile Image -->
+            <div class="relative">
+                <img src="/images/default-avatar.png" alt="Profile Picture" class="w-24 h-24 rounded-full border">
+                <label for="profilePicture" class="absolute bottom-0 right-0 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full p-1 cursor-pointer shadow">
+                    <input type="file" id="profilePicture" class="hidden" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-1.536a2.5 2.5 0 11-3.536-3.536L17 7l1.036-1.036zm4.708 1.536a9 9 0 11-7.192-7.192M15 11v2M9 11v2m-3 4h12m-6-4v4" />
+                    </svg>
+                </label>
+            </div>
+            <!-- Profile Info -->
+            <div class="flex-1 ml-4">
+                <input type="text" class="text-xl font-medium border border-gray-300 rounded-lg px-4 py-2 w-64 focus:ring-2 focus:ring-blue-400 focus:outline-none" value="JohnDoe123" />
+                <p class="text-gray-500 text-sm mt-1">Member since January 2025</p>
+            </div>
+            <!-- Save Button -->
+            <button class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700">Save</button>
+        </div>
+    </div>
+
+    <!-- Favorite Films Section -->
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
+        <h2 class="text-lg font-semibold mb-4">Favorite Films</h2>
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Film Card -->
+            @foreach (var film in Model.FavoriteFilms)
+            {
+                <div class="bg-gray-50 p-4 rounded-lg shadow flex items-center space-x-4">
+                    <div class="w-16 h-20 bg-gray-200 flex items-center justify-center rounded-md">
+                        <span class="text-gray-400 text-sm">Film Poster</span>
+                    </div>
+
+                    <div class="flex-1">
+                        <h3 class="font-medium text-gray-900">@film.Title</h3>
+                        <p class="text-sm text-gray-500">@film.Year</p>
+                        <p class="text-sm text-gray-600">⭐ @film.Rating</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-red-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-1 14m0 0l-7 0m8-14l-4-4m4 4h-4m-4 4h4m0-4v14" />
+                        </svg>
+                    </button>
+                </div>
+            }
+            <!-- Add Film Button -->
+            <div class="flex items-center justify-center border-dashed border-2 border-gray-300 rounded-lg p-4 cursor-pointer hover:bg-gray-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                <span class="ml-2 text-gray-500">Add Film</span>
+            </div>
+        </div>
+    </div>
+</div>

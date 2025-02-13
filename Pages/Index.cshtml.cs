@@ -1,57 +1,86 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MySql.Data.MySqlClient;
 
 namespace appPrototype_FFC.Pages
 {
-    public class IndexModel : PageModel
+    public class loginModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        [BindProperty]
+        public string? Username { get; set; }
 
-        public List<FilmItem> Films;
+        [BindProperty]
+        public string? Password { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public string? ErrorMessage { get; set; }
+
+        private readonly IConfiguration _configuration;
+
+        public loginModel(IConfiguration configuration)
         {
-            _logger = logger;
+            _configuration = configuration;
         }
 
         public void OnGet()
         {
-            Films = new List<FilmItem>();
-
-            Films.Add(new FilmItem { 
-                Id = 1,
-                Title = "Inception",
-                Rating = 5,
-                ImagePath = "/images/inception.jpg",
-                WeeklyPick = true,
-                Description = "Inception is a 2010 science fiction action film written and directed by Christopher Nolan, who also produced the film with Emma Thomas, his wife. The film stars Leonardo DiCaprio as a professional thief who steals information by infiltrating the subconscious of his targets. He is offered a chance to have his criminal history erased as payment for the implantation of another person's idea into a target's subconscious.",
-                Year = 2010,
-                DurationHrs = 2,
-                DurationMins = 28
-            });
-            Films.Add(new FilmItem
-            {
-                Id = 2,
-                Title = "The Matrix",
-                Rating = 4,
-                ImagePath = "/images/matrix.jpg",
-                Description = "The Matrix is a 1999 science fiction action film written and directed by the Wachowskis. It is the first installment in The Matrix film series, starring Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving, and Joe Pantoliano. It depicts a dystopian future in which humanity is unknowingly trapped inside a simulated reality, the Matrix, created by intelligent machines to distract humans while using their bodies as an energy source."
-                       
-            });
-
-
+            // Clear error message on page load
+            ErrorMessage = null;
         }
+
+        private bool ValidateUser(string username, string password)
+        {
+            string connectionString = "Server=localhost;Database=dbfridayfilmclub;User=root;Password=saroot;";
+
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    Console.WriteLine("Database connected successfully.");
+
+                    string query = "SELECT COUNT(*) FROM tblLogin WHERE username = @username AND passwd = @passwd";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@passwd", password);
+
+                        Console.WriteLine($"Executing query: {query} with username = {username} and password = {password}");
+
+                        int userCount = Convert.ToInt32(command.ExecuteScalar());
+                        Console.WriteLine($"User count: {userCount}");
+
+                        return userCount > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Database error: {ex.Message}");
+                ErrorMessage = "An error occurred while connecting to the database.";
+                return false;
+            }
+        }
+
+        public IActionResult OnPost()
+        {
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+            {
+                ErrorMessage = "Username and Password are required.";
+                return Page();
+            }
+
+            // Validate credentials using the database
+            if (ValidateUser(Username, Password))
+            {
+                return RedirectToPage("/Home");
+            }
+
+            // If credentials are incorrect, set error message
+            ErrorMessage = "Invalid username or password.";
+            return Page();
+        }
+
+       
     }
 
-    public class FilmItem {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public int Rating { get; set; }
-        public string ImagePath{ get; set; }
-        public string Description { get; set; }
-        public bool WeeklyPick { get; set; }
-        public int Year { get; set; }
-        public int DurationHrs { get; set; }
-        public int DurationMins { get; set; }
     }
-}

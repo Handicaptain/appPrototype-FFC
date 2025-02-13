@@ -13,19 +13,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
-
-// Configure the application to start with the login page
-app.MapGet("/", context =>
-{
-    context.Response.Redirect("/Login");
-    return Task.CompletedTask;
-});
 
 app.MapRazorPages();
 

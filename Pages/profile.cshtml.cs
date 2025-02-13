@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace appPrototype_FFC.Pages
 {
-    public class loginModel : PageModel
+    public class profileModel : PageModel
     {
         public void OnGet()
         {

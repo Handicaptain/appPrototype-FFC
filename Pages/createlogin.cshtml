@@ -1,5 +1,6 @@
 ﻿@page
-@model appPrototype_FFC.Pages.loginModel
+@model appPrototype_FFC.Pages.createLoginModel
+
 @{
     Layout = null;
 }
@@ -16,7 +17,7 @@
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div class="text-center mb-6">
             <h1 class="text-2xl font-bold">Welcome Back</h1>
-            <p class="text-gray-600">Sign in to your Friday Film Club account</p>
+            <p class="text-gray-600">Create your Friday Film Club account</p>
         </div>
         <form method="post">
             @if (!string.IsNullOrEmpty(Model.ErrorMessage))
@@ -31,17 +32,9 @@
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                 <input id="password" name="password" type="password" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
             </div>
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded">Sign In</button>
-            
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded">Create Account</button>
+
         </form>
-        <div class="text-center mb-3 mt-3">
-            <p class="text-gray-600">------OR------</p>
         </div>
-
-        <a href="/createLogin" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded block text-center">
-            Create Account
-        </a>
-
-    </div>
 </body>
 </html>
